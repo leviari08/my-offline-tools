@@ -1,18 +1,7 @@
 <script lang="ts">
-	type NavItem = {
-		label: string;
-		icon: string;
-		href?: string;
-	};
+	import { TOP_NAV_ITEMS, BOTTOM_NAV_ITEMS } from '../config/tools';
 
-	const topItems: NavItem[] = [
-		{ label: 'Text Compare', icon: 'compare_arrows', href: '#' },
-		{ label: 'JWT Decoder', icon: 'enhanced_encryption' },
-		{ label: 'Base64 Encoder', icon: 'code' },
-		{ label: 'JSON Formatter', icon: 'format_align_left' },
-	];
-
-	const bottomItems: NavItem[] = [{ label: 'Settings', icon: 'settings', href: '#' }];
+	let { activeTool = 'text-compare' } = $props();
 </script>
 
 <aside class="h-screen w-64 docked left-0 bg-white flex flex-col py-8 px-6 shrink-0 overflow-y-auto border-r border-outline-variant/30">
@@ -22,26 +11,23 @@
 	</div>
 
 	<nav class="flex-1 space-y-1">
-		{#each topItems as item}
-			{#if item.href}
-				<a class="flex items-center gap-3 px-3 py-2.5 bg-primary text-on-primary rounded-lg font-semibold transition-all shadow-sm" href={item.href}>
-					<span class="material-symbols-outlined text-[20px]" data-icon={item.icon}>{item.icon}</span>
-					<span class="text-sm">{item.label}</span>
-				</a>
-			{:else}
-				<a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-variant/50 rounded-lg transition-colors" href={item.href}>
-					<span class="material-symbols-outlined text-[20px]" data-icon={item.icon}>
-						{item.icon}
-					</span>
-					<span class="text-sm font-medium">{item.label}</span>
-				</a>
-			{/if}
+		{#each TOP_NAV_ITEMS as item}
+			<a 
+				href={item.href}
+				class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-semibold transition-all shadow-sm {activeTool === item.id ? 'bg-primary text-on-primary' : 'text-on-surface-variant hover:bg-surface-variant/50'}"
+			>
+				<span class="material-symbols-outlined text-[20px]" data-icon={item.icon}>{item.icon}</span>
+				<span class="text-sm">{item.label}</span>
+			</a>
 		{/each}
 	</nav>
 
 	<div class="mt-auto px-2">
-		{#each bottomItems as item}
-			<a class="flex items-center gap-3 py-2 text-on-surface-variant hover:text-on-surface transition-colors" href={item.href}>
+		{#each BOTTOM_NAV_ITEMS as item}
+			<a 
+				href={item.href}
+				class="flex items-center gap-3 py-2 text-on-surface-variant hover:text-on-surface transition-colors {activeTool === item.id ? 'text-primary' : ''}"
+			>
 				<span class="material-symbols-outlined text-[20px]" data-icon={item.icon}>{item.icon}</span>
 				<span class="text-sm font-medium">{item.label}</span>
 			</a>
