@@ -1,11 +1,12 @@
+import { decodeJwt, decodeProtectedHeader, jwtVerify } from 'jose';
+
 const DEFAULT_JWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJhZG1pbiI6dHJ1ZX0.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
 
-import jwt from 'jsonwebtoken';
-
-function verifyWithJsonWebToken(token: string, secret: string): boolean {
+async function verifyWithJose(token: string, secret: string): Promise<boolean> {
 	try {
 		if (!token || !secret) return false;
-		jwt.verify(token, secret);
+		const secretUint8 = new TextEncoder().encode(secret);
+		await jwtVerify(token, secretUint8);
 		return true;
 	} catch (e) {
 		return false;
@@ -20,25 +21,27 @@ class JwtDecoderState {
 	decoded = $derived.by(() => {
 		try {
 			if (!this.encodedToken) return null;
-			const decoded = jwt.decode(this.encodedToken, { complete: true });
-			if (!decoded) return null;
+			// Extract header and payload using jose's light decoders
+			const header = decodeProtectedHeader(this.encodedToken);
+			const payload = decodeJwt(this.encodedToken);
+			const parts = this.encodedToken.split('.');
 			return {
-				header: decoded.header,
-				payload: decoded.payload,
-				signature: decoded.signature
+				header,
+				payload,
+				signature: parts[2] || ''
 			};
 		} catch (e) {
 			return null;
 		}
 	});
 
-	runVerification() {
+	async runVerification() {
 		if (!this.encodedToken || !this.secret) {
 			this.isVerified = null;
 			return;
 		}
 
-		this.isVerified = verifyWithJsonWebToken(this.encodedToken, this.secret);
+		this.isVerified = await verifyWithJose(this.encodedToken, this.secret);
 	}
 
 	setToken(token: string) {
