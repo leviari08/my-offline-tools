@@ -6,17 +6,19 @@
 
 <aside class="h-screen w-64 docked left-0 bg-white flex flex-col py-8 px-6 shrink-0 overflow-y-auto border-r border-outline-variant/30">
 	<div class="mb-10 px-2">
-		<h1 class="text-xl font-bold text-on-surface font-headline tracking-tight">Syntax &amp; Steel</h1>
-		<p class="text-xs font-medium text-on-surface-variant mt-1 opacity-70">Precision Utility Suite</p>
+		<h1 class="text-xl font-bold text-on-surface font-headline tracking-tight">Offline tools</h1>
+		<p class="text-xs font-medium text-on-surface-variant mt-1 opacity-70">The perfect privacy-first developer toolbox</p>
 	</div>
 
 	<nav class="flex-1 space-y-1">
 		{#each TOP_NAV_ITEMS as item}
-			<a 
+			<a
 				href={item.href}
-				class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-semibold transition-all shadow-sm {activeTool === item.id ? 'bg-primary text-on-primary' : 'text-on-surface-variant hover:bg-surface-variant/50'}"
+				class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-semibold transition-all shadow-sm {activeTool === item.id
+					? 'bg-primary/15 text-on-primary border-l-primary border-l-4'
+					: 'text-on-surface-variant hover:bg-surface-variant/30'}"
 			>
-				<span class="material-symbols-outlined text-[20px]" data-icon={item.icon}>{item.icon}</span>
+				<span class="material-symbols-outlined text-[20px] {activeTool === item.id ? 'text-primary' : ''}" data-icon={item.icon}>{item.icon}</span>
 				<span class="text-sm">{item.label}</span>
 			</a>
 		{/each}
@@ -24,12 +26,14 @@
 
 	<div class="mt-auto px-2">
 		{#each BOTTOM_NAV_ITEMS as item}
-			<a 
+			<a
 				href={item.href}
-				class="flex items-center gap-3 py-2 text-on-surface-variant hover:text-on-surface transition-colors {activeTool === item.id ? 'text-primary' : ''}"
+				class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-semibold transition-all shadow-sm {activeTool === item.id
+					? 'bg-primary/15 text-on-primary border-l-primary border-l-4'
+					: 'text-on-surface-variant hover:bg-surface-variant/30'}"
 			>
-				<span class="material-symbols-outlined text-[20px]" data-icon={item.icon}>{item.icon}</span>
-				<span class="text-sm font-medium">{item.label}</span>
+				<span class="material-symbols-outlined text-[20px] {activeTool === item.id ? 'text-primary' : ''}" data-icon={item.icon}>{item.icon}</span>
+				<span class="text-sm">{item.label}</span>
 			</a>
 		{/each}
 	</div>
