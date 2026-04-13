@@ -8,6 +8,7 @@ export interface NavItem {
 export const TOP_NAV_ITEMS: NavItem[] = [
 	{ id: 'text-compare', label: 'Text Compare', icon: 'compare_arrows', href: '#/text-compare' },
 	{ id: 'jwt-decoder', label: 'JWT Decoder', icon: 'enhanced_encryption', href: '#/jwt-decoder' },
+	{ id: 'notebook', label: 'Notebook', icon: 'edit_note', href: '#/notebook' },
 	{ id: 'base64', label: 'Base64 Encoder', icon: 'code', href: '#/base64' },
 	{ id: 'json-formatter', label: 'JSON Formatter', icon: 'format_align_left', href: '#/json-formatter' },
 ];
