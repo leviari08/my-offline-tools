@@ -13,17 +13,16 @@
 <main class="flex-1 flex flex-col bg-background overflow-hidden">
 	<HeaderActions />
 
-	<section class="flex-1 px-10 pb-10 grid grid-cols-2 gap-6 overflow-hidden">
+	<section class="flex-1 p-6 grid grid-cols-2 gap-6 overflow-hidden">
 		<!-- Source Panel -->
 		<div class="bg-surface rounded-xl border border-outline-variant/30 flex flex-col h-full overflow-hidden shadow-sm">
 			<div class="flex items-center justify-between px-5 py-3 border-b border-outline-variant/20 bg-background/50">
-				<h2 class="text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.2em]">Original Text</h2>
-				<span class="px-2 py-0.5 rounded text-[9px] font-bold bg-surface-variant text-on-surface-variant">SOURCE</span>
+				<h2 class="text-xs font-bold text-on-surface-variant uppercase tracking-[0.2em]">Original Text</h2>
 			</div>
 			<div class="flex-1 flex overflow-hidden">
 				<!-- Line Numbers -->
 				<div
-					class="w-10 bg-background/30 text-outline/50 py-4 flex flex-col items-center mono-font text-[10px] leading-[22px] select-none border-r border-outline-variant/10 shrink-0"
+					class="w-10 bg-background/30 text-outline/50 py-4 flex flex-col items-center mono-font text-xs leading-[22px] select-none border-r border-outline-variant/10 shrink-0"
 				>
 					{#each Array(maxLines) as _, i}
 						<span class="h-[22px]">{i + 1}</span>
@@ -41,15 +40,12 @@
 		<!-- Changed Panel -->
 		<div class="bg-surface rounded-xl border border-outline-variant/30 flex flex-col h-full overflow-hidden shadow-sm">
 			<div class="flex items-center justify-between px-5 py-3 border-b border-outline-variant/20 bg-background/50">
-				<h2 class="text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.2em]">Modified Text</h2>
-				<div class="flex gap-2">
-					<span class="px-2 py-0.5 rounded text-[9px] font-bold bg-primary/10 text-primary border border-primary/20 uppercase tracking-tighter">VERSION B</span>
-				</div>
+				<h2 class="text-xs font-bold text-on-surface-variant uppercase tracking-[0.2em]">Modified Text</h2>
 			</div>
 			<div class="flex-1 flex overflow-hidden relative">
 				<!-- Line Numbers -->
 				<div
-					class="w-10 bg-background/30 text-outline/50 py-4 flex flex-col items-center mono-font text-[10px] leading-[22px] select-none border-r border-outline-variant/10 shrink-0"
+					class="w-10 bg-background/30 text-outline/50 py-4 flex flex-col items-center mono-font text-xs leading-[22px] select-none border-r border-outline-variant/10 shrink-0"
 				>
 					{#each Array(maxLines) as _, i}
 						<span class="h-[22px]">{i + 1}</span>
@@ -62,9 +58,9 @@
 						{#each textCompareState.diffResult as part}
 							<span
 								class:text-error={part.removed}
-								class:text-primary={part.added}
+								class:text-success={part.added}
 								class:line-through={part.removed}
-								class={`${part.removed ? 'bg-error-container/40' : ''} ${part.added ? 'bg-primary/20' : ''}`}>{part.value}</span
+								class={`${part.removed ? 'bg-error-container/40' : ''} ${part.added ? 'bg-success/40' : ''}`}>{part.value}</span
 							>
 						{/each}
 					</div>

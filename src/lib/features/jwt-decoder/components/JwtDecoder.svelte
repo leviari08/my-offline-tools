@@ -28,7 +28,11 @@
 	});
 </script>
 
-<main class="flex-1 flex flex-col bg-background overflow-hidden p-8">
+<main class="flex-1 flex flex-col bg-background overflow-hidden p-6">
+	<div class="flex flex-col justify-start gap-1 mb-4">
+		<h1 class="text-2xl font-headline font-bold">JWT Decoder</h1>
+		<p class="text-xs text-outline opacity-80 uppercase tracking-widest font-bold">Decode and verify JSON Web Tokens</p>
+	</div>
 	<div class="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-8 overflow-hidden">
 		<!-- Left Side: Encoded Input -->
 		<div class="flex flex-col h-full overflow-hidden">

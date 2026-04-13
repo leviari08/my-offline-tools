@@ -10,7 +10,7 @@
 	});
 </script>
 
-<aside class="h-screen w-64 docked left-0 bg-surface flex flex-col py-8 px-6 shrink-0 overflow-y-auto border-r border-outline-variant/30">
+<aside class="h-screen w-64 docked left-0 bg-surface flex flex-col py-8 px-4 shrink-0 overflow-y-auto border-r border-outline-variant/30">
 	<div class="mb-10 px-2">
 		<h1 class="text-xl font-bold text-on-surface font-headline tracking-tight">Offline tools</h1>
 		<p class="text-xs font-medium text-on-surface-variant mt-1 opacity-70">The perfect privacy-first developer toolbox</p>

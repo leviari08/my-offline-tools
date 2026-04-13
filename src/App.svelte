@@ -41,9 +41,9 @@
 	{:else}
 		<div class="flex-1 flex items-center justify-center text-outline">
 			<div class="text-center">
-				<span class="material-symbols-outlined text-6xl mb-4">construction</span>
-				<h2 class="text-xl font-bold uppercase tracking-widest">Under Construction</h2>
-				<p class="text-sm opacity-60 mt-2 italic font-medium">This tool will be available soon in your offline suite.</p>
+				<span class="material-symbols-outlined mb-4">construction</span>
+				<h2 class="text-2xl font-bold uppercase tracking-widest">Under Construction</h2>
+				<p class="text-lg opacity-60 mt-2 italic font-medium">This tool will be available soon in your offline suite.</p>
 			</div>
 		</div>
 	{/if}

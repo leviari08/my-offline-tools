@@ -51,14 +51,9 @@
 <main class="flex-1 flex flex-col h-screen max-h-screen">
 	<header class="p-6 pb-2">
 		<div class="flex items-center justify-between mb-2">
-			<div class="flex items-center gap-3">
-				<div class="p-2 bg-primary/10 rounded-xl">
-					<span class="material-symbols-outlined text-primary block">edit_note</span>
-				</div>
-				<div>
-					<h1 class="text-2xl font-headline font-bold">Notebook</h1>
-					<p class="text-xs text-outline opacity-80 uppercase tracking-widest font-bold">Local persistent notes</p>
-				</div>
+			<div class="flex flex-col justify-start gap-1">
+				<h1 class="text-2xl font-headline font-bold">Notebook</h1>
+				<p class="text-xs text-outline opacity-80 uppercase tracking-widest font-bold">Local persistent notes</p>
 			</div>
 
 			<div class="flex items-center gap-2">
