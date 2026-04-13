@@ -57,7 +57,7 @@
 						<!-- Transparent Textarea for input -->
 						<textarea
 							bind:value={jwtDecoderState.encodedToken}
-							class="w-full h-full bg-transparent p-6 mono-font text-base leading-[26px] text-transparent caret-on-surface focus:outline-none resize-none placeholder:text-outline/30 z-10 relative selection:bg-primary/20 border-none ring-0 focus:ring-0"
+							class="w-full h-full bg-transparent p-6 mono-font text-base leading-[26px] text-transparent caret-on-surface focus:outline-none resize-none placeholder:text-outline/70 z-10 relative selection:bg-primary/20 border-none ring-0 focus:ring-0"
 							placeholder="Paste your encoded JWT here (header.payload.signature)..."
 						></textarea>
 					</div>
@@ -77,7 +77,7 @@
 					<span class="text-[10px] font-medium text-outline/60 italic uppercase tracking-wider">Algorithm & Token Type</span>
 				</div>
 				<div class="p-4">
-					<pre class="mono-font text-base text-[#FB015B] bg-[#F1F3F5] rounded-lg p-4 overflow-auto border border-outline-variant/10"><code
+					<pre class="mono-font text-base text-[#FB015B] bg-surface-variant/30 rounded-lg p-4 overflow-auto border border-outline-variant/10"><code
 							>{formatJson(decodedData?.header)}</code
 						></pre>
 				</div>
@@ -93,7 +93,7 @@
 					<span class="text-[10px] font-medium text-outline/60 italic uppercase tracking-wider">Data & Permissions</span>
 				</div>
 				<div class="p-4">
-					<pre class="mono-font text-base text-[#D63AFF] bg-[#F1F3F5] rounded-lg p-4 overflow-auto border border-outline-variant/10"><code
+					<pre class="mono-font text-base text-[#D63AFF] bg-surface-variant/30 rounded-lg p-4 overflow-auto border border-outline-variant/10"><code
 							>{formatJson(decodedData?.payload)}</code
 						></pre>
 				</div>
@@ -101,7 +101,7 @@
 
 			<!-- Signature Verification -->
 			<div
-				class="bg-surface rounded-xl border overflow-hidden shadow-md ring-1 ring-inset transition-all duration-300 flex flex-col
+				class="bg-surface rounded-xl border overflow-hidden shadow-md ring-1 ring-inset flex flex-col
 				{isSignatureValid === null ? 'border-[#00B9F1] ring-[#00B9F1]/10' : ''}
 				{isSignatureValid === true ? 'border-success ring-success/10' : ''}
 				{isSignatureValid === false ? 'border-error ring-error/10' : ''}"
@@ -129,7 +129,7 @@
 						<textarea
 							bind:value={jwtDecoderState.secret}
 							placeholder="your-256-bit-secret"
-							class="w-full bg-[#F1F3F5] border border-outline-variant/20 rounded-lg p-4 text-on-surface text-sm focus:outline-none focus:border-[#00B9F1]/50 resize-none h-24 shadow-inner"
+							class="w-full bg-surface-variant/30 border border-outline-variant/20 rounded-lg p-4 text-on-surface text-sm focus:outline-none focus:border-[#00B9F1]/50 resize-none h-24 shadow-inner placeholder:text-outline/70"
 						></textarea>
 					</div>
 

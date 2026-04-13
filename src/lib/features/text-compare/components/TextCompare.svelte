@@ -32,7 +32,7 @@
 				<!-- Editor Area -->
 				<textarea
 					bind:value={textCompareState.leftText}
-					class="flex-1 p-4 bg-transparent border-none focus:ring-0 mono-font text-sm leading-[22px] text-on-surface resize-none focus:outline-none placeholder:text-outline-variant whitespace-pre overflow-auto"
+					class="flex-1 p-4 bg-transparent border-none focus:ring-0 mono-font text-sm leading-[22px] text-on-surface resize-none focus:outline-none placeholder:text-outline/70 whitespace-pre overflow-auto"
 					placeholder="Paste original text here..."
 				></textarea>
 			</div>
@@ -79,7 +79,7 @@
 					<!-- Editor Area -->
 					<textarea
 						bind:value={textCompareState.rightText}
-						class="flex-1 p-4 bg-transparent border-none focus:ring-0 mono-font text-sm leading-[22px] text-on-surface resize-none focus:outline-none placeholder:text-outline-variant whitespace-pre overflow-auto"
+						class="flex-1 p-4 bg-transparent border-none focus:ring-0 mono-font text-sm leading-[22px] text-on-surface resize-none focus:outline-none placeholder:text-outline/70 whitespace-pre overflow-auto"
 						placeholder="Paste modified text here..."
 					></textarea>
 				{/if}
@@ -93,21 +93,5 @@
 <style>
 	.mono-font {
 		font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
-	}
-
-	/* Custom scrollbar for better aesthetics */
-	::-webkit-scrollbar {
-		width: 8px;
-		height: 8px;
-	}
-	::-webkit-scrollbar-track {
-		background: transparent;
-	}
-	::-webkit-scrollbar-thumb {
-		background: rgba(0, 0, 0, 0.1);
-		border-radius: 10px;
-	}
-	::-webkit-scrollbar-thumb:hover {
-		background: rgba(0, 0, 0, 0.2);
 	}
 </style>
