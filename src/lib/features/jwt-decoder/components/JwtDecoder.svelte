@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { jwtDecoderState } from '../state.svelte';
 
+	const jwtPartContainerClass = 'bg-surface rounded-xl border border-outline-variant/30 overflow-hidden shadow-sm';
+
 	let encodedContent = $derived(jwtDecoderState.encodedToken);
 	let decodedData = $derived(jwtDecoderState.decoded);
 
@@ -52,9 +54,13 @@
 						>
 							{#if encodedContent}
 								{@const parts = tokenParts()}
-								<span class="text-[#FB015B]">{parts.header}</span>{#if parts.dots >= 1}<span class="text-on-surface">.</span><span class="text-[#D63AFF]"
-										>{parts.payload}</span
-									>{/if}{#if parts.dots >= 2}<span class="text-on-surface">.</span><span class="text-[#00B9F1]">{parts.signature}</span>{/if}
+								<span class="text-[#FB015B]">{parts.header}</span>
+								{#if parts.dots >= 1}<span class="text-on-surface">.</span>
+									<span class="text-[#D63AFF]">{parts.payload}</span>
+								{/if}
+								{#if parts.dots >= 2}<span class="text-on-surface">.</span>
+									<span class="text-[#00B9F1]">{parts.signature}</span>
+								{/if}
 							{/if}
 						</div>
 
@@ -72,7 +78,7 @@
 		<!-- Right Side: Decoded Content -->
 		<div class="flex flex-col space-y-4 overflow-auto pr-2">
 			<!-- Header Panel -->
-			<div class="bg-surface rounded-xl border border-outline-variant/30 overflow-hidden shadow-sm">
+			<div class={jwtPartContainerClass}>
 				<div class="flex items-center justify-between px-6 py-4 border-b border-outline-variant/20 bg-background/50">
 					<div class="flex items-center gap-2">
 						<span class="material-symbols-outlined text-[#FB015B] text-base">settings_input_component</span>
@@ -88,7 +94,7 @@
 			</div>
 
 			<!-- Payload Panel -->
-			<div class="bg-surface rounded-xl border border-outline-variant/30 overflow-hidden shadow-sm">
+			<div class={jwtPartContainerClass}>
 				<div class="flex items-center justify-between px-6 py-4 border-b border-outline-variant/20 bg-background/50">
 					<div class="flex items-center gap-2">
 						<span class="material-symbols-outlined text-[#D63AFF] text-base">data_object</span>
@@ -105,7 +111,7 @@
 
 			<!-- Signature Verification -->
 			<div
-				class="bg-surface rounded-xl border overflow-hidden shadow-md ring-1 ring-inset flex flex-col
+				class="{jwtPartContainerClass}
 				{isSignatureValid === null ? 'border-[#00B9F1] ring-[#00B9F1]/10' : ''}
 				{isSignatureValid === true ? 'border-success ring-success/10' : ''}
 				{isSignatureValid === false ? 'border-error ring-error/10' : ''}"
