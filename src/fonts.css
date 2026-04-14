@@ -1,0 +1,125 @@
+/* assistant-200 - hebrew_latin */
+@font-face {
+	font-display: swap;
+	font-family: 'Assistant';
+	font-style: normal;
+	font-weight: 200;
+	src: url('./assets/fonts/assistant/assistant-v24-hebrew_latin-200.woff2') format('woff2');
+}
+
+/* assistant-300 - hebrew_latin */
+@font-face {
+	font-display: swap;
+	font-family: 'Assistant';
+	font-style: normal;
+	font-weight: 300;
+	src: url('./assets/fonts/assistant/assistant-v24-hebrew_latin-300.woff2') format('woff2');
+}
+
+/* assistant-regular - hebrew_latin */
+@font-face {
+	font-display: swap;
+	font-family: 'Assistant';
+	font-style: normal;
+	font-weight: 400;
+	src: url('./assets/fonts/assistant/assistant-v24-hebrew_latin-regular.woff2') format('woff2');
+}
+
+/* assistant-500 - hebrew_latin */
+@font-face {
+	font-display: swap;
+	font-family: 'Assistant';
+	font-style: normal;
+	font-weight: 500;
+	src: url('./assets/fonts/assistant/assistant-v24-hebrew_latin-500.woff2') format('woff2');
+}
+
+/* assistant-600 - hebrew_latin */
+@font-face {
+	font-display: swap;
+	font-family: 'Assistant';
+	font-style: normal;
+	font-weight: 600;
+	src: url('./assets/fonts/assistant/assistant-v24-hebrew_latin-600.woff2') format('woff2');
+}
+
+/* assistant-700 - hebrew_latin */
+@font-face {
+	font-display: swap;
+	font-family: 'Assistant';
+	font-style: normal;
+	font-weight: 700;
+	src: url('./assets/fonts/assistant/assistant-v24-hebrew_latin-700.woff2') format('woff2');
+}
+
+/* assistant-800 - hebrew_latin */
+@font-face {
+	font-display: swap;
+	font-family: 'Assistant';
+	font-style: normal;
+	font-weight: 800;
+	src: url('./assets/fonts/assistant/assistant-v24-hebrew_latin-800.woff2') format('woff2');
+}
+
+/* material-symbols-outlined-100 - latin */
+@font-face {
+	font-display: swap;
+	font-family: 'Material Symbols Outlined';
+	font-style: normal;
+	font-weight: 100;
+	src: url('./assets/fonts/material-symbols-outlined/material-symbols-outlined-v325-latin-100.woff2') format('woff2');
+}
+
+/* material-symbols-outlined-200 - latin */
+@font-face {
+	font-display: swap;
+	font-family: 'Material Symbols Outlined';
+	font-style: normal;
+	font-weight: 200;
+	src: url('./assets/fonts/material-symbols-outlined/material-symbols-outlined-v325-latin-200.woff2') format('woff2');
+}
+
+/* material-symbols-outlined-300 - latin */
+@font-face {
+	font-display: swap;
+	font-family: 'Material Symbols Outlined';
+	font-style: normal;
+	font-weight: 300;
+	src: url('./assets/fonts/material-symbols-outlined/material-symbols-outlined-v325-latin-300.woff2') format('woff2');
+}
+
+/* material-symbols-outlined-regular - latin */
+@font-face {
+	font-display: swap;
+	font-family: 'Material Symbols Outlined';
+	font-style: normal;
+	font-weight: 400;
+	src: url('./assets/fonts/material-symbols-outlined/material-symbols-outlined-v325-latin-regular.woff2') format('woff2');
+}
+
+/* material-symbols-outlined-500 - latin */
+@font-face {
+	font-display: swap;
+	font-family: 'Material Symbols Outlined';
+	font-style: normal;
+	font-weight: 500;
+	src: url('./assets/fonts/material-symbols-outlined/material-symbols-outlined-v325-latin-500.woff2') format('woff2');
+}
+
+/* material-symbols-outlined-600 - latin */
+@font-face {
+	font-display: swap;
+	font-family: 'Material Symbols Outlined';
+	font-style: normal;
+	font-weight: 600;
+	src: url('./assets/fonts/material-symbols-outlined/material-symbols-outlined-v325-latin-600.woff2') format('woff2');
+}
+
+/* material-symbols-outlined-700 - latin */
+@font-face {
+	font-display: swap;
+	font-family: 'Material Symbols Outlined';
+	font-style: normal;
+	font-weight: 700;
+	src: url('./assets/fonts/material-symbols-outlined/material-symbols-outlined-v325-latin-700.woff2') format('woff2');
+}
