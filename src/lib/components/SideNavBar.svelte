@@ -11,9 +11,13 @@
 </script>
 
 <aside class="h-screen w-64 docked left-0 bg-surface flex flex-col py-8 px-4 shrink-0 overflow-y-auto border-r border-outline-variant/30">
-	<div class="mb-10 px-2">
-		<h1 class="text-xl font-bold text-on-surface font-headline tracking-tight">Offline tools</h1>
-		<p class="text-xs font-medium text-on-surface-variant mt-1 opacity-70">The perfect privacy-first developer toolbox</p>
+	<div class="mb-6 px-2">
+		<h1 class="text-3xl font-bold text-on-surface font-headline tracking-tight">Offline tools</h1>
+		<div class="text-lg font-medium text-on-surface-variant mt-1 opacity-70">
+			<p>Developer toolbox</p>
+			<p>Fully local</p>
+			<p>Fully yours</p>
+		</div>
 	</div>
 
 	<nav class="flex-1 space-y-1">
@@ -30,7 +34,7 @@
 		{/each}
 	</nav>
 
-	<div class="mt-auto px-2">
+	<div class="mt-auto">
 		{#each BOTTOM_NAV_ITEMS as item}
 			<a
 				href={item.href}

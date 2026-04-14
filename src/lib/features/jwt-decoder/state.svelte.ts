@@ -1,6 +1,7 @@
 import { decodeJwt, decodeProtectedHeader, jwtVerify } from 'jose';
 
-const DEFAULT_JWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJhZG1pbiI6dHJ1ZX0.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+const DEFAULT_JWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0NzYzNTEiLCJuYW1lIjoiVGVzbGEiLCJraW5nIjp0cnVlLCJpYXQiOjE3NzUwMDg4MDB9.0PkDmDZ1G5iiRkyFl14G63Jd2G1qDzpYWfsnIzUODHA';
+const DEFAULT_SECRET = 'a-string-secret-at-least-256-bits-long';
 
 async function verifyWithJose(token: string, secret: string): Promise<boolean> {
 	try {
@@ -15,7 +16,7 @@ async function verifyWithJose(token: string, secret: string): Promise<boolean> {
 
 class JwtDecoderState {
 	encodedToken = $state(DEFAULT_JWT);
-	secret = $state('');
+	secret = $state(DEFAULT_SECRET);
 	isVerified = $state<boolean | null>(null);
 
 	decoded = $derived.by(() => {
