@@ -14,6 +14,7 @@ export const TOP_NAV_ITEMS: NavItem[] = [
 ];
 
 export const BOTTOM_NAV_ITEMS: NavItem[] = [
+	{ id: 'privacy', label: 'Privacy', icon: 'shield', href: '#/privacy' },
 	{ id: 'settings', label: 'Settings', icon: 'settings', href: '#/settings' }
 ];
 

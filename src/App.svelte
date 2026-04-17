@@ -4,10 +4,13 @@
 	import TextCompare from './lib/features/text-compare/components/TextCompare.svelte';
 	import JwtDecoder from './lib/features/jwt-decoder/components/JwtDecoder.svelte';
 	import Notebook from './lib/features/notebook/components/Notebook.svelte';
+	import Privacy from './lib/features/privacy/components/Privacy.svelte';
 
 	import { ALL_NAV_ITEMS } from './lib/config/tools';
 
-	let activeTool = $state('text-compare');
+	const DEFAULT_TOOL = 'privacy';
+
+	let activeTool = $state(DEFAULT_TOOL);
 
 	function updateRoute() {
 		const hash = window.location.hash;
@@ -15,10 +18,8 @@
 
 		if (tool) {
 			activeTool = tool.id;
-		} else if (hash === '#/' || hash === '') {
-			activeTool = 'text-compare';
 		} else {
-			activeTool = 'text-compare';
+			activeTool = DEFAULT_TOOL;
 		}
 	}
 
@@ -38,6 +39,8 @@
 		<JwtDecoder />
 	{:else if activeTool === 'notebook'}
 		<Notebook />
+	{:else if activeTool === 'privacy'}
+		<Privacy />
 	{:else}
 		<div class="flex-1 flex items-center justify-center text-outline">
 			<div class="text-center">
