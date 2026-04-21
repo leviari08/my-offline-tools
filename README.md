@@ -22,9 +22,7 @@ A collection of fast, clean, and useful developer tools all running directly in 
 
 - 🔍 Text Compare (Diff)
 - 🔐 JWT Decoder
-- 🔄 Base64 Encode / Decode
-
-*(More coming soon...)*
+- 📝 Private Notebook (Synced to local storage)
 
 ---
 
@@ -36,8 +34,9 @@ A collection of fast, clean, and useful developer tools all running directly in 
 
 ---
 
-## 🧑‍💻 Development
+## 💻 Development
 
 ```bash
 npm install
 npm run dev
+```
