@@ -5,6 +5,7 @@
 
 	let encodedContent = $derived(jwtDecoderState.encodedToken);
 	let decodedData = $derived(jwtDecoderState.decoded);
+	let isSignatureValid = $derived(jwtDecoderState.isVerified);
 
 	function formatJson(obj: any) {
 		if (!obj) return '';
@@ -12,17 +13,18 @@
 	}
 
 	// Split token for colored display
-	let tokenParts = $derived(() => {
+	let tokenDisplayParts = $derived(() => {
+		const colors = ['text-[#FB015B]', 'text-[#D63AFF]', 'text-[#00B9F1]'];
 		const parts = encodedContent.split('.');
-		return {
-			header: parts[0] || '',
-			payload: parts[1] || '',
-			signature: parts[2] || '',
-			dots: parts.length - 1,
-		};
-	});
+		const result = [];
 
-	let isSignatureValid = $derived(jwtDecoderState.isVerified);
+		for (let i = 0; i < parts.length; i++) {
+			if (i > 0) result.push({ text: '.' });
+			result.push({ text: parts[i], color: colors[i] });
+		}
+
+		return result;
+	});
 
 	// Automatically verify signature on changes
 	$effect(() => {
@@ -50,18 +52,11 @@
 					<div class="relative flex-1 group">
 						<!-- Display Overlay for colors -->
 						<div
-							class="absolute inset-0 p-6 mono-font text-base leading-[26px] break-all whitespace-pre-wrap pointer-events-none select-none z-0 overflow-hidden"
+							class="absolute inset-0 p-6 mono-font leading-[26px] break-all whitespace-pre-wrap pointer-events-none select-none z-0 overflow-hidden text-on-surface"
 						>
-							{#if encodedContent}
-								{@const parts = tokenParts()}
-								<span class="text-[#FB015B]">{parts.header}</span>
-								{#if parts.dots >= 1}<span class="text-on-surface">.</span>
-									<span class="text-[#D63AFF]">{parts.payload}</span>
-								{/if}
-								{#if parts.dots >= 2}<span class="text-on-surface">.</span>
-									<span class="text-[#00B9F1]">{parts.signature}</span>
-								{/if}
-							{/if}
+							{#each tokenDisplayParts() as part}
+								<span class={part.color || ''}>{part.text}</span>
+							{/each}
 						</div>
 
 						<!-- Transparent Textarea for input -->
@@ -87,25 +82,25 @@
 					<span class="text-[10px] font-medium text-outline/60 italic uppercase tracking-wider">Algorithm & Token Type</span>
 				</div>
 				<div class="p-4">
-					<pre class="mono-font text-base text-[#FB015B] bg-surface-variant/30 rounded-lg p-4 overflow-auto border border-outline-variant/10"><code
-							>{formatJson(decodedData?.header)}</code
-						></pre>
+					<pre class="mono-font text-base text-[#FB015B] bg-surface-variant/30 rounded-lg p-4 overflow-auto border border-outline-variant/10">
+						<code>{formatJson(decodedData?.header)}</code>
+					</pre>
 				</div>
 			</div>
 
 			<!-- Payload Panel -->
 			<div class={jwtPartContainerClass}>
-				<div class="flex items-center justify-between px-6 py-4 border-b border-outline-variant/20 bg-background/50">
-					<div class="flex items-center gap-2">
-						<span class="material-symbols-outlined text-[#D63AFF] text-base">data_object</span>
-						<h2 class="text-[12px] font-bold text-on-surface uppercase tracking-[0.2em]">Payload (Claims)</h2>
-					</div>
-					<span class="text-[10px] font-medium text-outline/60 italic uppercase tracking-wider">Data & Permissions</span>
+				<!-- <div class="flex items-center justify-between px-6 py-4 border-b border-outline-variant/20 bg-background/50"> -->
+				<div class="flex items-center gap-2">
+					<span class="material-symbols-outlined text-[#D63AFF] text-base">data_object</span>
+					<h2 class="text-[12px] font-bold text-on-surface uppercase tracking-[0.2em]">Payload (Claims)</h2>
 				</div>
+				<span class="text-[10px] font-medium text-outline/60 italic uppercase tracking-wider">Data & Permissions</span>
+				<!-- </div> -->
 				<div class="p-4">
-					<pre class="mono-font text-base text-[#D63AFF] bg-surface-variant/30 rounded-lg p-4 overflow-auto border border-outline-variant/10"><code
-							>{formatJson(decodedData?.payload)}</code
-						></pre>
+					<pre class="mono-font text-base text-[#D63AFF] bg-surface-variant/30 rounded-lg p-4 overflow-auto border border-outline-variant/10">
+						<code>{formatJson(decodedData?.payload)}</code>
+					</pre>
 				</div>
 			</div>
 
