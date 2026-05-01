@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import SideNavBar from './lib/components/SideNavBar.svelte';
+	import SideNavBar from './lib/features/sidebar/SideNavBar.svelte';
 	import TextCompare from './lib/features/text-compare/components/TextCompare.svelte';
 	import JwtDecoder from './lib/features/jwt-decoder/components/JwtDecoder.svelte';
 	import Notebook from './lib/features/notebook/components/Notebook.svelte';

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { TOP_NAV_ITEMS, BOTTOM_NAV_ITEMS } from '../config/tools';
+	import { TOP_NAV_ITEMS, BOTTOM_NAV_ITEMS } from '../../config/tools';
 	import { onMount } from 'svelte';
-	import { themeService } from '../utils/theme.svelte';
+	import { themeService } from '../../utils/theme.svelte';
 
 	let { activeTool = 'text-compare' } = $props();
 

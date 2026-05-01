@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { downloadTextFile } from '../../../utils/download';
+	import { downloadTextFile } from '../../../utils/download-text-file';
 
 	let content = $state('');
 	let showCopySuccess = $state(false);
