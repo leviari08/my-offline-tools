@@ -5,16 +5,47 @@
 
 	let encodedContent = $derived(jwtDecoderState.encodedToken);
 	let decodedData = $derived(jwtDecoderState.decoded);
-	let isSignatureValid = $derived(jwtDecoderState.isVerified);
 
-	function formatJson(obj: any) {
+	function formatJson(obj: unknown) {
 		if (!obj) return '';
-		return JSON.stringify(obj, null, 4);
+		return JSON.stringify(obj, null, 2);
 	}
+
+	let verificationStyle = $derived.by(() => {
+		switch (jwtDecoderState.isVerified) {
+			case true:
+				return {
+					container: 'border-success ring-success/10',
+					header: 'bg-success/5 border-success/10',
+					icon: 'text-success',
+					statusIcon: 'check_circle',
+					statusText: 'Signature Verified',
+					statusClass: 'text-success',
+				};
+			case false:
+				return {
+					container: 'border-error ring-error/10',
+					header: 'bg-error/5 border-error/10',
+					icon: 'text-error',
+					statusIcon: 'cancel',
+					statusText: 'Invalid Signature',
+					statusClass: 'text-error',
+				};
+			default:
+				return {
+					container: 'border-[#00B9F1] ring-[#00B9F1]/10',
+					header: 'bg-[#00B9F1]/5 border-[#00B9F1]/10',
+					icon: 'text-[#00B9F1]',
+					statusIcon: 'info',
+					statusText: 'Unverified',
+					statusClass: 'text-outline/40',
+				};
+		}
+	});
 
 	// Split token for colored display
 	let tokenDisplayParts = $derived(() => {
-		const colors = ['text-[#FB015B]', 'text-[#D63AFF]', 'text-[#00B9F1]'];
+		const colors = ['text-[#FB0101]', 'text-[#D63AFF]', 'text-[#00B9F1]'];
 		const parts = encodedContent.split('.');
 		const result = [];
 
@@ -41,18 +72,15 @@
 		<!-- Left Side: Encoded Input -->
 		<div class="flex flex-col h-full overflow-hidden">
 			<div class="bg-surface rounded-xl border border-outline-variant/30 flex flex-col h-full overflow-hidden shadow-sm">
-				<div class="flex items-center justify-between px-6 py-4 border-b border-outline-variant/20 bg-background/50">
-					<div class="flex items-center gap-2">
-						<span class="material-symbols-outlined text-primary text-base">enhanced_encryption</span>
-						<h2 class="text-[12px] font-bold text-on-surface uppercase tracking-[0.2em]">Encoded Input</h2>
-					</div>
-					<span class="px-2 py-1 rounded text-[10px] font-bold bg-surface-variant text-on-surface-variant uppercase tracking-wider">Waiting</span>
+				<div class="flex items-center gap-2 px-6 py-4 border-b border-outline-variant/20 bg-background/50">
+					<span class="material-symbols-outlined text-primary text-base">enhanced_encryption</span>
+					<h2 class="text-[12px] font-bold text-on-surface uppercase tracking-[0.2em]">Encoded Input</h2>
 				</div>
-				<div class="flex-1 flex flex-col p-6 overflow-hidden relative">
+				<div class="flex-1 flex flex-col p-8 overflow-hidden relative">
 					<div class="relative flex-1 group">
 						<!-- Display Overlay for colors -->
 						<div
-							class="absolute inset-0 p-6 mono-font leading-[26px] break-all whitespace-pre-wrap pointer-events-none select-none z-0 overflow-hidden text-on-surface"
+							class="absolute inset-0 mono-font leading-[26px] break-all whitespace-pre-wrap pointer-events-none select-none z-0 overflow-hidden text-on-surface"
 						>
 							{#each tokenDisplayParts() as part}
 								<span class={part.color || ''}>{part.text}</span>
@@ -62,7 +90,7 @@
 						<!-- Transparent Textarea for input -->
 						<textarea
 							bind:value={jwtDecoderState.encodedToken}
-							class="w-full h-full bg-transparent p-6 mono-font text-base leading-[26px] text-transparent caret-on-surface focus:outline-none resize-none placeholder:text-outline/70 z-10 relative selection:bg-primary/20 border-none ring-0 focus:ring-0"
+							class="w-full h-full bg-transparent mono-font text-base leading-[26px] text-transparent caret-on-surface focus:outline-none resize-none placeholder:text-outline/70 z-10 relative selection:bg-primary/20 border-none ring-0 focus:ring-0"
 							placeholder="Paste your encoded JWT here (header.payload.signature)..."
 						></textarea>
 					</div>
@@ -72,59 +100,32 @@
 
 		<!-- Right Side: Decoded Content -->
 		<div class="flex flex-col space-y-4 overflow-auto pr-2">
-			<!-- Header Panel -->
-			<div class={jwtPartContainerClass}>
-				<div class="flex items-center justify-between px-6 py-4 border-b border-outline-variant/20 bg-background/50">
-					<div class="flex items-center gap-2">
-						<span class="material-symbols-outlined text-[#FB015B] text-base">settings_input_component</span>
-						<h2 class="text-[12px] font-bold text-on-surface uppercase tracking-[0.2em]">Header</h2>
+			{#snippet decodedPanel(icon: string, title: string, subtitle: string, colorClass: string, data: unknown)}
+				<div class={jwtPartContainerClass}>
+					<div class="flex items-center justify-between px-6 py-4 border-b border-outline-variant/20 bg-background/50">
+						<div class="flex items-center gap-2">
+							<span class="material-symbols-outlined {colorClass} text-base">{icon}</span>
+							<h2 class="text-[12px] font-bold text-on-surface uppercase tracking-[0.2em]">{title}</h2>
+						</div>
+						<span class="text-[10px] font-medium text-outline/60 italic uppercase tracking-wider">{subtitle}</span>
 					</div>
-					<span class="text-[10px] font-medium text-outline/60 italic uppercase tracking-wider">Algorithm & Token Type</span>
+					<code class="{colorClass} bg-surface p-4 overflow-auto border border-outline-variant/10 whitespace-pre-wrap">
+						{formatJson(data)}
+					</code>
 				</div>
-				<div class="p-4">
-					<pre class="mono-font text-base text-[#FB015B] bg-surface-variant/30 rounded-lg p-4 overflow-auto border border-outline-variant/10">
-						<code>{formatJson(decodedData?.header)}</code>
-					</pre>
-				</div>
-			</div>
+			{/snippet}
+
+			<!-- Header Panel -->
+			{@render decodedPanel('settings_input_component', 'Header', 'Algorithm & Token Type', 'text-[#FB0101]', decodedData?.header)}
 
 			<!-- Payload Panel -->
-			<div class={jwtPartContainerClass}>
-				<!-- <div class="flex items-center justify-between px-6 py-4 border-b border-outline-variant/20 bg-background/50"> -->
-				<div class="flex items-center gap-2">
-					<span class="material-symbols-outlined text-[#D63AFF] text-base">data_object</span>
-					<h2 class="text-[12px] font-bold text-on-surface uppercase tracking-[0.2em]">Payload (Claims)</h2>
-				</div>
-				<span class="text-[10px] font-medium text-outline/60 italic uppercase tracking-wider">Data & Permissions</span>
-				<!-- </div> -->
-				<div class="p-4">
-					<pre class="mono-font text-base text-[#D63AFF] bg-surface-variant/30 rounded-lg p-4 overflow-auto border border-outline-variant/10">
-						<code>{formatJson(decodedData?.payload)}</code>
-					</pre>
-				</div>
-			</div>
+			{@render decodedPanel('data_object', 'Payload (Claims)', 'Data & Permissions', 'text-[#D63AFF]', decodedData?.payload)}
 
-			<!-- Signature Verification -->
-			<div
-				class="{jwtPartContainerClass}
-				{isSignatureValid === null ? 'border-[#00B9F1] ring-[#00B9F1]/10' : ''}
-				{isSignatureValid === true ? 'border-success ring-success/10' : ''}
-				{isSignatureValid === false ? 'border-error ring-error/10' : ''}"
-			>
-				<div
-					class="flex items-center justify-between px-6 py-4 border-b
-					{isSignatureValid === null ? 'bg-[#00B9F1]/5 border-[#00B9F1]/10' : ''}
-					{isSignatureValid === true ? 'bg-success/5 border-success/10' : ''}
-					{isSignatureValid === false ? 'bg-error/5 border-error/10' : ''}"
-				>
+			<!-- Signature Verification Panel -->
+			<div class="{jwtPartContainerClass} {verificationStyle.container}">
+				<div class="flex items-center justify-between px-6 py-4 border-b {verificationStyle.header}">
 					<div class="flex items-center gap-2">
-						<span
-							class="material-symbols-outlined text-base {isSignatureValid === null
-								? 'text-[#00B9F1]'
-								: isSignatureValid === true
-									? 'text-success'
-									: 'text-error'}">verified_user</span
-						>
+						<span class="material-symbols-outlined text-base {verificationStyle.icon}">verified_user</span>
 						<h2 class="text-[12px] font-bold text-on-surface uppercase tracking-[0.2em]">Verify Signature</h2>
 					</div>
 				</div>
@@ -138,19 +139,14 @@
 						></textarea>
 					</div>
 
-					<div class="mt-2 flex items-center justify-between border-t border-outline-variant/10 pt-6">
-						<div class="flex items-center gap-3">
-							{#if isSignatureValid === true}
-								<span class="material-symbols-outlined text-success text-3xl">check_circle</span>
-								<span class="text-lg font-bold text-success uppercase tracking-widest">Signature Verified</span>
-							{:else}
-								<span class="material-symbols-outlined {isSignatureValid === false ? 'text-error' : 'text-outline/40'} text-3xl">
-									{isSignatureValid === false ? 'cancel' : 'info'}
-								</span>
-								<span class="text-lg font-bold uppercase tracking-widest {isSignatureValid === false ? 'text-error' : 'text-outline/40'}">
-									{isSignatureValid === false ? 'Invalid Signature' : 'Unverified'}
-								</span>
-							{/if}
+					<div class="mt-2 flex items-center justify-between border-t border-outline-variant/10">
+						<div class="flex items-center gap-3 {verificationStyle.statusClass}">
+							<span class="material-symbols-outlined text-3xl">
+								{verificationStyle.statusIcon}
+							</span>
+							<span class="text-lg font-bold uppercase tracking-widest">
+								{verificationStyle.statusText}
+							</span>
 						</div>
 					</div>
 				</div>
@@ -169,13 +165,7 @@
 		scrollbar-color: var(--color-outline-variant) transparent;
 	}
 
-	pre {
-		scrollbar-width: thin;
-		scrollbar-color: var(--color-outline-variant) transparent;
-	}
-
 	code {
-		display: inline-block;
-		min-width: 100%;
+		display: block;
 	}
 </style>
